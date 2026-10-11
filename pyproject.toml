@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pumpfun-stream"
+version = "0.1.0"
+description = "Stream and decode pump.fun and PumpSwap Anchor events from Solana into JSONL or SQLite."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Denys" }]
+requires-python = ">=3.10"
+# websockets: the WebSocket client for logsSubscribe (the standard library has none).
+dependencies = ["websockets>=13.0"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.scripts]
+pumpfun-stream = "pumpfun_stream.cli:main"
+
+[tool.setuptools]
+packages = ["pumpfun_stream"]
+
+[tool.setuptools.package-data]
+pumpfun_stream = ["idl/*.json", "idl/SOURCE.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
